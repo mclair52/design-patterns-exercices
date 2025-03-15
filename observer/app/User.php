@@ -2,6 +2,8 @@
 
 namespace App;
 
+use SplSubject;
+
 class User 
 {
     // Hors exercice mais notable:
@@ -10,6 +12,11 @@ class User
         private string $name,
         private bool $notified = false
     ) {}
+
+    public function update(SplSubject $subject )
+    {
+        $this->notified = true;
+    }
 
 
     public function isNotified(): bool
