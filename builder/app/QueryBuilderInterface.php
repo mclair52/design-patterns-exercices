@@ -3,11 +3,10 @@
 # TODO: Créer une classe QueryBuilder en utilisant le design pattern Builder
 
 namespace App;
-use App\QueryBuilder;
 interface QueryBuilderInterface
 {
-    public function select(string $select);
-    public function where(string $where);
-    public function from(string $from);
-    public function build(): QueryBuilder;
+    public function select(array $fields);
+    public function where(array $conditions);
+    public function from(string $table);
+    public function getQuery(): string;
 }

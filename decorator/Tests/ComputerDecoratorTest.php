@@ -20,31 +20,32 @@ class ComputerDecoratorTest extends TestCase
 
     public function testLaptopWithGPU()
     {
-        // TODO: faire le test
-        $this->assertSame(true, 1 === 1);
+        $laptop= new Laptop();
+        $GPU=new GPU($laptop);
+
+        $this->assertSame(600, $GPU->getPrice());
+        $this->assertSame("A laptop computer with a GPU", $GPU->getDescription());
     }
 
     public function testLaptopWithOLEDScreen()
     {
-        // TODO: faire le test
-        $this->assertSame(false, 1 === 2);
+        $laptop= new Laptop();
+        $OLEDScreen=new OLEDScreen($laptop);
+
+        $this->assertSame(500, $OLEDScreen->getPrice());
+        $this->assertSame("A laptop computer with an OLED screen", $OLEDScreen->getDescription());
     }
 
-    public function testbasicGPU()
+    public function testLaptopWithGPUAndOLEDScreen()
     {
-        $GPU = new GPU();
+        $laptop= new Laptop();
+        $GPU=new GPU($laptop);
+        $OLEDScreen=new OLEDScreen($GPU);
 
-        $this->assertSame(200, $GPU->getPrice());
-        $this->assertSame("A GPU computer", $GPU->getDescription());
+        $this->assertSame(700, $OLEDScreen->getPrice());
+        $this->assertSame("A laptop computer with a GPU with an OLED screen", $OLEDScreen->getDescription());
     }
 
-    public function testbasicOledScreen()
-    {
-        $OledScreen = new OLEDScreen();
-
-        $this->assertSame(100, $OledScreen->getPrice());
-        $this->assertSame("A OLED Screen computer", $OledScreen->getDescription());
-    }
 
 
 }

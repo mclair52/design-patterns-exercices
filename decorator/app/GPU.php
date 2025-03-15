@@ -1,8 +1,9 @@
-<?php
-
+<?php 
 namespace App;
 
-class Laptop implements Computer {
+
+class GPU implements Computer{
+    
     protected $computer;
     public function __construct(Computer $computer)
     {
@@ -10,12 +11,11 @@ class Laptop implements Computer {
     }
     public function getPrice(): int 
     {
-        return $this->computer->getPrice() + 500;
+        return $this->computer->getPrice() + 200;
     }
 
     public function getDescription(): string 
     {
-        return $this->computer->getDescription() . " with a laptop";
+        return $this->computer->getDescription() . " with a GPU";
     }
-}   
-
+}

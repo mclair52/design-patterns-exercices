@@ -1,50 +1,34 @@
 <?php
-namespace MySQLQueryBuilder;
+namespace App;
 class MySQLQueryBuilder implements QueryBuilderInterface
 {
-    public string $where = '';
-    public string $from = '';
-    public string $select = '';
+    private $query;
 
-    public function select(string $select): self
+    public function select(array $fields): QueryBuilderInterface
     {
-        $this->select = $select;
+        $this->query = "Select " . implode(", ", $fields);
+        return $this;
+    }
+    
+    public function from(string $table): QueryBuilderInterface
+    {
+        $this->query .= " FROM " . $table;
         return $this;
     }
 
-    public function where(string $where): self
+    public function where(array $conditions): QueryBuilderInterface
     {
-        $this->where = $where;
+        $this->query .= " WHERE " . implode(" AND ", $conditions);
         return $this;
     }
 
-    public function from(string $from): self
-    {
-        $this->from = $from;
-        return $this;
-    }
-
-    public function build(): QueryBuilder
-    {
-        return new QueryBuilder($this);
-    }
-}
-
-class QueryBuilder
-{
-    protected string $where;
-    protected string $from;
-    protected string $select;
-
-    public function __construct(MySQLQueryBuilder $builder)
-    {
-        $this->where = $builder->where;
-        $this->from = $builder->from;
-        $this->select = $builder->select;
-    }
 
     public function getQuery(): string
     {
-        return "SELECT {$this->select} FROM {$this->from} WHERE {$this->where}";
+        return $this->query;
     }
 }
+
+
+
+
